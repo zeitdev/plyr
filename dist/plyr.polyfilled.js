@@ -10589,7 +10589,11 @@ typeof navigator === "object" && (function (global, factory) {
 
 
         if (browser.isIos && this.player.config.fullscreen.iosNative) {
-          this.target.webkitEnterFullscreen();
+          if (this.player.provider === 'vimeo') {
+            this.player.embed.requestFullscreen();
+          } else {
+            this.target.webkitEnterFullscreen();
+          }
         } else if (!Fullscreen.native || this.forceFallback) {
           this.toggleFallback(true);
         } else if (!this.prefix) {
